@@ -2,6 +2,13 @@ var _ = require("lodash");
 
 var request = require("express/lib/request");
 
+function isPlainObject(obj) {
+    return  typeof obj === 'object' // separate from primitives
+        && obj !== null         // is obvious
+        && obj.constructor === Object // separate instances (Array, DOM, ...)
+        && Object.prototype.toString.call(obj) === '[object Object]'; // separate build-in like Math
+}
+
 module.exports = function(app) {
   app.use((req, res, next) => {
     req.runMiddleware = (path, options, callback) => {
@@ -68,12 +75,12 @@ function createRes(callback) {
   var headers = {};
   var code = 200;
   res.set = res.header = (x, y) => {
-    if (arguments.length === 2) {
-      res.setHeader(x, y);
-    } else {
+    if (isPlainObject(x)) {
       for (var key in x) {
         res.setHeader(key, x[key]);
-      }
+      }      
+    } else if(typeof x === 'string') {
+      res.setHeader(x, y);
     }
     return res;
   }
