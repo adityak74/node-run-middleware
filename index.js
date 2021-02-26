@@ -86,7 +86,6 @@ function createRes(callback) {
   }
   res.setHeader = (x, y) => {
     headers[x] = y;
-    headers[x.toLowerCase()] = y;
     return res;
   };
   res.removeHeader = (x) => {
