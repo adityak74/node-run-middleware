@@ -82,9 +82,12 @@ function createRes(callback) {
     headers[x.toLowerCase()] = y;
     return res;
   };
-  // res.get=(x) => {
-  // 	return headers[x]
-  // }
+  res.removeHeader = (x) => {
+    res._removedHeader[x] = headers[x];
+    delete headers[x];
+  }
+  res.get = res.getHeader = (x) => headers[x];
+  
   res.redirect = function(_code, url) {
     if (!_.isNumber(_code)) {
       code = 301;
