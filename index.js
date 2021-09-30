@@ -70,7 +70,7 @@ function createRes(callback) {
   var res = {
     _removedHeader: {},
   };
-  // res=_.extend(res,require('express/lib/response'));
+  res = _.extend(res, require('express/lib/response'));
 
   var headers = {};
   var code = 200;
