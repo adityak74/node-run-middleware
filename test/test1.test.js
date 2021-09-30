@@ -14,7 +14,7 @@ test("test redirect", done => {
   ) {
     try {
       expect(code).toEqual(301);
-      expect(headers.location).toEqual("http://github.com");
+      expect(headers.Location).toEqual("http://github.com");
       done();
     } catch (err) {
       done(err);
@@ -35,7 +35,7 @@ test("test custom redirect", done => {
   ) {
     try {
       expect(code).toEqual(302);
-      expect(headers.location).toEqual("http://github.com");
+      expect(headers.Location).toEqual("http://github.com");
       done();
     } catch (err) {
       done(err);
